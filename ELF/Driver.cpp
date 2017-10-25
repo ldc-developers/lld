@@ -259,7 +259,8 @@ static void initLLVM(opt::InputArgList &Args) {
   V.push_back("lld (LLVM option parsing)");
   for (auto *Arg : Args.filtered(OPT_mllvm))
     V.push_back(Arg->getValue());
-  cl::ParseCommandLineOptions(V.size(), V.data());
+  if (V.size() > 1)
+    cl::ParseCommandLineOptions(V.size(), V.data());
 }
 
 // Some command line options or some combinations of them are not allowed.
